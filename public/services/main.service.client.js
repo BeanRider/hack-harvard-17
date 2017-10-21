@@ -10,7 +10,7 @@
             faceRecon: faceRecon,
             voiceToText: voiceToText,
             nlp: nlp,
-            upload2:upload2
+            upload:upload
         };
         return api;
 
@@ -34,8 +34,17 @@
             return $http.get("/api/nlp");
         }
 
-        function upload2(file) {
-            return $http.post("/upload2",file);
+        function upload(formData) {
+            let request = {
+                method: 'POST',
+                url: '/upload',
+                data: formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            return $http(request);
+            //return $http.post("/upload", file);
         }
 
 

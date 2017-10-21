@@ -30,7 +30,6 @@ module.exports = function (app,Vision) {
 
 
     app.post('/upload', multer.single('file'),upload);
-    app.post('/upload2',upload2);
 
 
     function upload(req, res){
@@ -64,30 +63,45 @@ module.exports = function (app,Vision) {
     blobStream.end(req.file.buffer);
 }
 
-    function upload2(req, res){
-        if (!req.body) {
-            res.status(400).send('No file uploaded.');
-            return;
-        }
-        console.log(req.body);
-
-        // Create a new blob in the bucket and upload the file data.
-        const blob = bucket.file(req.body.originalname);
-        //const blobStream = blob.createWriteStream();
-        const blobStream = blob.createWriteStream({
-            metadata: {
-                contentType: req.body.mimetype
-            }
-        });
-
-        blobStream.on('error', (err) => {
-            next(err);
-    });
-        console.log(req.body.buffer);
-        blobStream.end(req.body.buffer);
-    }
-
     function faceRecon(req, res) {
+        storage
+            .bucket(bucketName)
+            .getFiles()
+            .then(function (results) {
+                const files = results[0];
+                console.log('Files:');
+                var faces = [];
+                var ools = files
+                    .forEach(function (file) {
+                    console.log(file.name);
+                    const gcsPath = `gs://${bucketName}/${file.name}`;
+                    const vision = Vision();
+                    console.log(gcsPath);
+                    vision
+                        .faceDetection({ source: { imageUri: gcsPath } })
+                        .then(function (results) {
+                            faces = faces.concat(results[0].faceAnnotations);
+                            console.log(faces);
+                            storage
+                                .bucket(bucketName)
+                                .file(file.name)
+                                .delete()
+                        })
+
+                });
+                Promise.all(ools)
+                    .then(function () {
+                        console.log("outside faces are" + faces);
+                        res.send(faces);
+                    });
+
+
+            });
+
+/*
+
+
+
         storage
             .bucket(bucketName)
             .getFiles()
@@ -95,6 +109,7 @@ module.exports = function (app,Vision) {
             const files = results[0];
 
         console.log('Files:');
+        var faces = [];
         files.forEach(file => {
             console.log(file.name);
 
@@ -107,7 +122,8 @@ module.exports = function (app,Vision) {
 
         vision.faceDetection({ source: { imageUri: gcsPath } })
             .then((results) => {
-            const faces = results[0].faceAnnotations;
+            faces = faces.concat(results[0].faceAnnotations);
+            console.log(faces);
 
         console.log('Faces:');
         faces.forEach((face, i) => {
@@ -124,18 +140,22 @@ module.exports = function (app,Vision) {
             .catch(err => {
             console.error('ERROR:', err);
     });
-        res.send(faces);
+
     })
     .catch(err => {
             console.error('ERROR:', err);
     });
 
+            console.log("partha faces"+faces);
+            res.send(faces);
     });
+
 
     })
     .catch((err) => {
             console.error('ERROR:', err);
     });
+    */
     }
 
 

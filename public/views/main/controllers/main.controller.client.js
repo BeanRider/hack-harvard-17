@@ -5,8 +5,20 @@
 
     function mainController(mainService, $location, $window) {
         var vm = this;
+        vm.image_counter = 0;
         vm.output = output;
         vm.voiceToText = voiceToText;
+        vm.startLoop = startLoop;
+        vm.stopLoop = stopLoop;
+        vm.take_snap = take_snap;
+        var myInterval = 0;
+
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var video = document.getElementById('video');
+
+// Trigger photo take
+        var snap = document.getElementById("snap");
 
         function init() {
             document.getElementById("logo").onclick = function () {
@@ -103,30 +115,18 @@
                     video.play();
                 });
             }
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            var video = document.getElementById('video');
 
-// Trigger photo take
-            var snap = document.getElementById("snap");
-            snap.addEventListener("click", function () {
+           /* snap.addEventListener("click", function () {
                 context.drawImage(video, 0, 0, 640, 480);
-                //var image = new Image();
+                image_counter = image_counter + 1;
                 dataURL = canvas.toDataURL("image/jpeg",0.85);
-                snap.href = dataURL;
-                /*image.originalname = "image1.png";
-                console.log("image"+ image.src);
+                var file = dataUrlToImage(dataURL,image_counter);
+                var formData = new FormData();
+                formData.append('file', file, file.name);
+                mainService.upload(formData);
 
-                promise = mainService.upload2(image);
-                promise.success(function (text) {
-                    if (text) {
-                        console.log("the text is " + text);
-                        vm.faceText = text;
-                    } else {
-                        vm.error = 'text not found';
-                    }
-                });*/
-            });
+            });*/
+
 
         }
         init();
@@ -147,6 +147,37 @@
 
         function voiceToText() {
             let promise = mainService.nlp();
+        }
+
+// STARTS and Resets the loop if any
+        function startLoop() {
+
+            myInterval = setInterval(Function("document.getElementById(\"snap\").click();"), 20000);
+        }
+
+    function stopLoop() {
+        clearInterval(myInterval);
+    }
+        function dataUrlToImage(dataUrl,image_counter) {
+            console.log("daturltoImage"+ image_counter);
+            var binary = atob(dataUrl.split(',')[1]),
+                data = [];
+            for (var i = 0; i < binary.length; i++)
+                data.push(binary.charCodeAt(i));
+            return new File([new Uint8Array(data)], "'recorded"+image_counter+".jpeg'", {
+                type: 'data:image/jpeg'
+            });
+        }
+
+        function take_snap() {
+            context.drawImage(video, 0, 0, 640, 480);
+            vm.image_counter = vm.image_counter + 1;
+            console.log(vm.image_counter);
+            dataURL = canvas.toDataURL("image/jpeg",0.85);
+            var file = dataUrlToImage(dataURL,vm.image_counter);
+            var formData = new FormData();
+            formData.append('file', file, file.name);
+            mainService.upload(formData);
         }
     }
 })();
