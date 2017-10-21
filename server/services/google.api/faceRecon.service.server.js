@@ -29,39 +29,38 @@ module.exports = function (app,Vision) {
 // [END config]
 
 
-    app.post('/upload', multer.single('file'),upload);
+    app.post('/upload', multer.single('file'), upload);
 
 
-    function upload(req, res){
+    function upload(req, res) {
         if (!req.file) {
-        res.status(400).send('No file uploaded.');
-        return;
-    }
+            res.status(400).send('No file uploaded.');
+            return;
+        }
 
-    // Create a new blob in the bucket and upload the file data.
-    const blob = bucket.file(req.file.originalname);
-    //const blobStream = blob.createWriteStream();
+        // Create a new blob in the bucket and upload the file data.
+        const blob = bucket.file(req.file.originalname);
+        //const blobStream = blob.createWriteStream();
         const blobStream = blob.createWriteStream({
             metadata: {
                 contentType: req.file.mimetype
             }
         });
 
-    blobStream.on('error', (err) => {
-        next(err);
-});
+        blobStream.on('error', (err) => {
+            next(err);
+        });
 
 
+        /*    blobStream.on('finish', () => {
+                // The public URL can be used to directly access the file via HTTP.
+                const publicUrl = format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
+            //res.status(200).send(publicUrl);
+        });*/
 
-/*    blobStream.on('finish', () => {
-        // The public URL can be used to directly access the file via HTTP.
-        const publicUrl = format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
-    //res.status(200).send(publicUrl);
-});*/
-
-    console.log(req.file.buffer);
-    blobStream.end(req.file.buffer);
-}
+        console.log(req.file.buffer);
+        blobStream.end(req.file.buffer);
+    }
 
     function faceRecon(req, res) {
         storage
@@ -71,93 +70,31 @@ module.exports = function (app,Vision) {
                 const files = results[0];
                 console.log('Files:');
                 var faces = [];
-                var ools = files
+                files
                     .forEach(function (file) {
-                    console.log(file.name);
-                    const gcsPath = `gs://${bucketName}/${file.name}`;
-                    const vision = Vision();
-                    console.log(gcsPath);
-                    vision
-                        .faceDetection({ source: { imageUri: gcsPath } })
-                        .then(function (results) {
-                            faces = faces.concat(results[0].faceAnnotations);
-                            console.log(faces);
-                            storage
-                                .bucket(bucketName)
-                                .file(file.name)
-                                .delete()
-                        })
+                        console.log(file.name);
+                        const gcsPath = `gs://${bucketName}/${file.name}`;
+                        const vision = Vision();
+                        console.log(gcsPath);
+                        vision
+                            .faceDetection({source: {imageUri: gcsPath}})
+                            .then(function (results) {
+                                faces = faces.concat(results[0].faceAnnotations);
+                                console.log(faces);
+                                storage
+                                    .bucket(bucketName)
+                                    .file(file.name)
+                                    .delete()
+                                    .then(function () {
+                                        res.send(faces);
+                                    })
+                            })
 
-                });
-                Promise.all(ools)
-                    .then(function () {
-                        console.log("outside faces are" + faces);
-                        res.send(faces);
-                    });
+                    })
 
 
-            });
-
-/*
+            })
 
 
-
-        storage
-            .bucket(bucketName)
-            .getFiles()
-            .then(results => {
-            const files = results[0];
-
-        console.log('Files:');
-        var faces = [];
-        files.forEach(file => {
-            console.log(file.name);
-
-        const gcsPath = `gs://${bucketName}/${file.name}`;
-        // Instantiates clients
-        const vision = Vision();
-
-
-        console.log(gcsPath);
-
-        vision.faceDetection({ source: { imageUri: gcsPath } })
-            .then((results) => {
-            faces = faces.concat(results[0].faceAnnotations);
-            console.log(faces);
-
-        console.log('Faces:');
-        faces.forEach((face, i) => {
-            console.log(`  Face #${i + 1}:`);
-        console.log(`    Joy: ${face.joyLikelihood}`);
-        console.log(`    Anger: ${face.angerLikelihood}`);
-        console.log(`    Sorrow: ${face.sorrowLikelihood}`);
-        console.log(`    Surprise: ${face.surpriseLikelihood}`);
-    });
-        storage
-            .bucket(bucketName)
-            .file(file.name)
-            .delete()
-            .catch(err => {
-            console.error('ERROR:', err);
-    });
-
-    })
-    .catch(err => {
-            console.error('ERROR:', err);
-    });
-
-            console.log("partha faces"+faces);
-            res.send(faces);
-    });
-
-
-    })
-    .catch((err) => {
-            console.error('ERROR:', err);
-    });
-    */
-    }
-
-
-
-};
+    };
+}

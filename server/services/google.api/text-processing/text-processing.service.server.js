@@ -25,24 +25,25 @@ module.exports = function (app, Nlp){
             const sentiment = results[0].documentSentiment;
 
             var sentimentScore = sentiment.score;
+            sentimentScore = (sentimentScore * 5) + 5;
             console.log("Sentiment score: " + sentimentScore);
-            var sentimentEnum = "";
-
-            if(sentimentScore >= -1 && sentimentScore < -0.625){
-                sentimentEnum = "VERY_NEGATIVE";
-            }
-            else if(sentimentScore >= -0.625 && sentimentScore < -0.25){
-                sentimentEnum = "NEGATIVE";
-            }
-            else if(sentimentScore >= -0.25 && sentimentScore < 0.25){
-                sentimentEnum = "NEUTRAL";
-            }
-            else if(sentimentScore >= 0.25 && sentimentScore < 0.625){
-                sentimentEnum = "POSITIVE";
-            }
-            else{
-                sentimentEnum = "VERY POSITIVE";
-            }
+            // var sentimentEnum = "";
+            //
+            // if(sentimentScore >= -1 && sentimentScore < -0.625){
+            //     sentimentEnum = "VERY_NEGATIVE";
+            // }
+            // else if(sentimentScore >= -0.625 && sentimentScore < -0.25){
+            //     sentimentEnum = "NEGATIVE";
+            // }
+            // else if(sentimentScore >= -0.25 && sentimentScore < 0.25){
+            //     sentimentEnum = "NEUTRAL";
+            // }
+            // else if(sentimentScore >= 0.25 && sentimentScore < 0.625){
+            //     sentimentEnum = "POSITIVE";
+            // }
+            // else{
+            //     sentimentEnum = "VERY POSITIVE";
+            // }
 
             var sentimentMagnitude = sentiment.magnitude;
             console.log("Sentiment magnitude: " + sentimentMagnitude);
@@ -64,7 +65,7 @@ module.exports = function (app, Nlp){
         // console.log("SentimentEnum: " + sentimentEnum);
         // console.log("AccuracyConfidence" + accuracyConfidence);
 
-        var response = {sentimentEnumRes: sentimentEnum, accuracyConfidenceRes : accuracyConfidence};
+        var response = {sentimentScore: sentimentScore, accuracyConfidenceRes : accuracyConfidence};
 
         res.send(response);
     })

@@ -157,7 +157,7 @@
 // STARTS and Resets the loop if any
         function startLoop() {
 
-            myInterval = setInterval(Function("document.getElementById(\"snap\").click();"), 20000);
+            myInterval = setInterval(Function("document.getElementById(\"snap\").click();"), 10000);
         }
 
     function stopLoop() {

@@ -1,4 +1,5 @@
 <div>
+
     <div id="top-bar">
         <div id="logo">
             <img src="views/images/logo.png" height="80px"/>
@@ -30,26 +31,24 @@
             <audio id="player" controls></audio>
             <a id="download">Download</a>
 
-        <div class="container-fluid">
-            <h1> OUTPUT:</h1>
-            <h2>Face Recon:</h2>
-            <ul class="list-group">
-                <li>output:{{model.faceText}}</li>
-                <li ng-repeat="face in model.faceText" class="list-group-item">
-                    <ul class="list-group">
+    <div class="container-fluid">
+        <h1> OUTPUT:</h1>
+        <h2>Face Recon:</h2>
+        <ul class="list-group">
+            <li ng-repeat="face in model.faceText" class="list-group-item">
+                <ul class="list-group">
 
-                    <li>CONFIDENCE:{{face.detectionConfidence}}</li>
-                    <li>JOY: {{face.joyLikelihood}}</li>
-                    <li>ANGER: {{face.angerLikelihood}}</li>
-                    <li>SORROW: {{face.sorrowLikelihood}}</li>
-                    <li>SURPRISE: {{face.surpriseLikelihood}}</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <h2>Voice-to-Text</h2>
-            <p>Result: {{model.voiceText}}</p>
-        </div>
+                <li>CONFIDENCE:{{face.detectionConfidence}}</li>
+                <li>JOY: {{face.joyLikelihood}}</li>
+                <li>ANGER: {{face.angerLikelihood}}</li>
+                <li>SORROW: {{face.sorrowLikelihood}}</li>
+                <li>SURPRISE: {{face.surpriseLikelihood}}</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h2>Voice-to-Text</h2>
+        <p>Result: {{model.voiceText}}</p>
     </div>
 </div>
