@@ -8,8 +8,6 @@
         vm.fullname = "Jeffrey Weng";
         vm.image_counter = 0;
         vm.output = output;
-        vm.voiceToText = voiceToText;
-        vm.endMeeting = endMeeting;
         vm.startLoop = startLoop;
         vm.stopLoop = stopLoop;
         vm.take_snap = take_snap;
@@ -18,12 +16,6 @@
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
         var video = document.getElementById('video');
-
-        function endMeeting() {
-            $window.location.href = '/#/results';
-            $rootScope.holisticScoreLanguage = 10*Math.random();
-            $rootScope.holisticScoreFace = 10*Math.random();
-        }
 
 // Trigger photo take
         var snap = document.getElementById("snap");
@@ -77,33 +69,53 @@
             }
 
             let hasSent = false;
-            let download = document.getElementById("download");
-            download.onclick
-                = function() {
+
+            function sendAudioForProcessing() {
                 bufferToDataUrl(function(dataUrl) {
                     let file = dataUrlToFile(dataUrl);
                     console.log(file);
                     // upload file to the server.
-                    var formData = new FormData();
+                    let formData = new FormData();
 
                     // add the files to formData object for the data payload
                     if (!hasSent) {
                         console.log("adding file");
                         hasSent = true;
                         formData.append('uploads[]', file, file.name);
-                        let promise = mainService.voiceToText(formData);
-                        promise.success(function (text) {
-                            if (text) {
-                                console.log("the text is " + text);
-                                vm.voiceText = text;
-                                $rootScope.voiceToText = text;
-                            } else {
-                                vm.error = 'text not found';
-                            }
-                        });
+                        mainService.voiceToText(formData)
+                            .then((text) => {
+                                if (text && text.data.length > 0) {
+                                    vm.voiceText = text.data[0].alternatives[0].transcript;
+                                    console.log("the transcript is " + vm.voiceText);
+
+                                    $rootScope.voiceToText = text;
+
+                                    return mainService.nlp(vm.voiceText);
+                                } else {
+                                    vm.error = 'text not found';
+                                    throw Error(vm.error);
+                                }
+                            })
+                            .then((data) => {
+                                $rootScope.holisticScoreLanguage = parseFloat(data.data.sentimentScore);
+                                // $rootScope.holisticScoreLanguage = 10*Math.random();
+                                $rootScope.holisticScoreFace = "Joy";
+
+                                console.log("nlp: " + data.data + ", score = " + data.data.sentimentScore);
+                                $window.location.href = '/#/results';
+
+                            })
+                            .catch((err) => {
+                                console.error('ERROR:', err);
+                            });
                     }
 
                 });
+            }
+
+            vm.endMeeting = function() {
+                sendAudioForProcessing();
+
             };
 
             navigator.mediaDevices.getUserMedia({ audio: true, video: false })
@@ -148,10 +160,6 @@
                     vm.error = 'text not found';
                 }
             });
-        }
-
-        function voiceToText() {
-            let promise = mainService.nlp();
         }
 
 // STARTS and Resets the loop if any

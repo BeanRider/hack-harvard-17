@@ -1,6 +1,6 @@
 module.exports = function (app, Nlp){
 
-    app.get("/api/nlp", nlp);
+    app.post("/api/nlp", nlp);
 
     function nlp(req, res){
         console.log("Inside nlp");
@@ -9,7 +9,8 @@ module.exports = function (app, Nlp){
         const client = new Nlp.LanguageServiceClient();
 
         // The text to analyze
-        const text = 'Hello World';
+        const text = req.body.data;
+        console.log("Got text = " + text);
 
         const document = {
             content: text,
@@ -71,7 +72,8 @@ module.exports = function (app, Nlp){
     })
     .catch(err => {
             console.error('ERROR:', err);
+            res.send(500);
     });
     }
 
-}
+};

@@ -30,8 +30,8 @@
             return $http(request);
         }
 
-        function nlp(){
-            return $http.get("/api/nlp");
+        function nlp(text) {
+            return $http.post("/api/nlp", {data: text});
         }
 
         function upload(formData) {

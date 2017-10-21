@@ -18,7 +18,7 @@
 
         function initHolisticScores() {
             vm.holisticScoreLanguage = round10($rootScope.holisticScoreLanguage);
-            vm.holisticScoreFace = round10($rootScope.holisticScoreFace);
+            vm.holisticScoreFace = $rootScope.holisticScoreFace;
 
             // Set color based on language score
             let score = vm.holisticScoreLanguage;
