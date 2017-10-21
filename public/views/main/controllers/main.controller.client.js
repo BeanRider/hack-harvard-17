@@ -18,7 +18,7 @@
 
             let player = document.getElementById('player');
             let mr;
-            let handleSuccess = function(stream) {=
+            let handleSuccess = function(stream) {
                 console.log("handleSuccess");
                 mr = new MediaRecorder(stream, {mimeType: "audio/webm;codecs=opus"});
                 mr.ondataavailable = ondataavailable;
@@ -102,12 +102,14 @@
             var context = canvas.getContext('2d');
             var video = document.getElementById('video');
 
-            // Trigger photo take
-            document.getElementById("snap").addEventListener("click", function () {
+// Trigger photo take
+            var snap = document.getElementById("snap");
+            snap.addEventListener("click", function () {
                 context.drawImage(video, 0, 0, 640, 480);
-                var image = new Image();
-                image.src = canvas.toDataURL("image/jpeg",0.85);
-                image.originalname = "image1.png";
+                //var image = new Image();
+                dataURL = canvas.toDataURL("image/jpeg",0.85);
+                snap.href = dataURL;
+                /*image.originalname = "image1.png";
                 console.log("image"+ image.src);
 
                 promise = mainService.upload2(image);
@@ -118,7 +120,7 @@
                     } else {
                         vm.error = 'text not found';
                     }
-                });
+                });*/
             });
 
         }

@@ -1,13 +1,9 @@
 <div>
-    <h1>Page under construction.</h1>
-    <h2>Face Recon:</h2>
-    <p>text is {{model.faceText}}</p>
-
-    <h2>Voice-to-Text</h2>
-    <p>Result: {{model.voiceText}}</p>
+    <h1>Click a photo and upload it to analyze the emotion.</h1>
 
     <video id="video" width="640" height="480" autoplay></video>
-    <button id="snap">Snap Photo</button>
+
+    <a href="#" class="button" id="snap" download="convo-buddy.jpg">Snap Photo</a>
     <canvas id="canvas" width="640" height="480"></canvas>
 
         <form action="/upload" method="post" enctype="multipart/form-data">
@@ -31,7 +27,19 @@
 
     </form>
 
-
     <audio id="player" controls></audio>
     <a id="download">Download</a>
+
+    <div>
+        <h1> OUTPUT:</h1>
+        <h2>Face Recon:</h2>
+        <h2>CONFIDENCE: {{model.faceText}}</h2>
+        <h2>JOY: {{model.faceText.joyLikelihood}}</h2>
+        <h2>ANGER: {{model.faceText.angerLikelihood}}</h2>
+        <h2>SORROW: {{model.faceText.sorrowLikelihood}}</h2>
+        <h2>SURPRISE: {{model.faceText.surpriseLikelihood}}</h2>
+
+        <h2>Voice-to-Text</h2>
+        <p>Result: {{model.voiceText}}</p>
+    </div>
 </div>
