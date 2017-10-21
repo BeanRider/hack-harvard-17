@@ -1,49 +1,55 @@
 <div>
-
     <div id="top-bar">
         <div id="logo">
             <img src="views/images/logo.png" height="80px"/>
             <p>ConvoBuddy</p>
         </div>
     </div>
+
     <div id="loading">
         <div><h1>generating report...</h1></div>
     </div>
     <div id="content-wrapper">
 
-        <h3>Click a photo and upload it to analyze the emotion.</h3>
+        <h2 id="record-status">⬤<b>&nbsp;&nbsp;Live</b></h2>
+        <div class="web-cam"><video id="video" width="500" height="500" autoplay></video></div>
+        <h2 id="who">Joined as {{model.fullname}}</h2>
 
-        <video id="video" width="640" height="480" autoplay></video>
+        <div id="exit-btn" ng-click="model.endMeeting()"><img src="views/images/exit-icon.png" height="80px"/><h2>End Meeting</h2></div>
+        <br />
 
-    <a href="" ng-click="model.take_snap()" class="button" id="snap" download="convo-buddy.jpg">Snap Photo</a>
-    <button id="record" ng-click="model.startLoop()">Record</button>
-    <button id="stop" ng-click="model.stopLoop()">Stop</button>
-    <canvas id="canvas" width="640" height="480"></canvas>
+        <a href="" ng-click="model.take_snap()" class="button" id="snap" download="convo-buddy.jpg">Snap Photo</a>
+        <button id="record" ng-click="model.startLoop()">Record</button>
+        <button id="stop" ng-click="model.stopLoop()">Stop</button>
 
-    <button ng-click="model.output()">analyze image</button>
 
-        <audio id="player" controls></audio>
-        <a id="download">Download</a>
+        <canvas class="hide" id="canvas" width="640" height="480"></canvas>
 
-    <div class="container-fluid">
-        <h1> OUTPUT:</h1>
-        <h2>Face Recon:</h2>
-        <ul class="list-group">
-            <li>output:{{model.faceText}}</li>
-            <li ng-repeat="face in model.faceText" class="list-group-item">
-                <ul class="list-group">
+        <button ng-click="model.output()">analyze image</button>
 
-                <li>CONFIDENCE:{{face.detectionConfidence}}</li>
-                <li>JOY: {{face.joyLikelihood}}</li>
-                <li>ANGER: {{face.angerLikelihood}}</li>
-                <li>SORROW: {{face.sorrowLikelihood}}</li>
-                <li>SURPRISE: {{face.surpriseLikelihood}}</li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <h2>Voice-to-Text</h2>
-        <p>Result: {{model.voiceText}}</p>
+            <audio id="player" controls></audio>
+            <a id="download">Download</a>
+
+        <div class="container-fluid">
+            <h1> OUTPUT:</h1>
+            <h2>Face Recon:</h2>
+            <ul class="list-group">
+                <li>output:{{model.faceText}}</li>
+                <li ng-repeat="face in model.faceText" class="list-group-item">
+                    <ul class="list-group">
+
+                    <li>CONFIDENCE:{{face.detectionConfidence}}</li>
+                    <li>JOY: {{face.joyLikelihood}}</li>
+                    <li>ANGER: {{face.angerLikelihood}}</li>
+                    <li>SORROW: {{face.sorrowLikelihood}}</li>
+                    <li>SURPRISE: {{face.surpriseLikelihood}}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h2>Voice-to-Text</h2>
+            <p>Result: {{model.voiceText}}</p>
+        </div>
     </div>
 </div>

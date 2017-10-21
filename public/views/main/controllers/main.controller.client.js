@@ -3,11 +3,13 @@
         .module("convobuddy")
         .controller("mainController", mainController);
 
-    function mainController(mainService, $location, $window) {
+    function mainController(mainService, $location, $window, $rootScope) {
         var vm = this;
+        vm.fullname = "Jeffrey Weng";
         vm.image_counter = 0;
         vm.output = output;
         vm.voiceToText = voiceToText;
+        vm.endMeeting = endMeeting;
         vm.startLoop = startLoop;
         vm.stopLoop = stopLoop;
         vm.take_snap = take_snap;
@@ -17,13 +19,16 @@
         var context = canvas.getContext('2d');
         var video = document.getElementById('video');
 
+        function endMeeting() {
+            $window.location.href = '/#/results';
+            $rootScope.holisticScoreLanguage = 10*Math.random();
+            $rootScope.holisticScoreFace = 10*Math.random();
+        }
+
 // Trigger photo take
         var snap = document.getElementById("snap");
 
         function init() {
-            document.getElementById("logo").onclick = function () {
-                $window.location.href = '/#/results';
-            };
 
             var buffer = [];
             function ondataavailable(e) {

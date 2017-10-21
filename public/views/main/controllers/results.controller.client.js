@@ -17,26 +17,30 @@
         init();
 
         function initHolisticScores() {
-            vm.holisticScoreVoice = 9.1;
-            vm.holisticScoreFace = 1.9;
+            vm.holisticScoreLanguage = round10($rootScope.holisticScoreLanguage);
+            vm.holisticScoreFace = round10($rootScope.holisticScoreFace);
 
-            let avgScore = (vm.holisticScoreVoice + vm.holisticScoreFace) / 2;
+            // Set color based on language score
+            let score = vm.holisticScoreLanguage;
 
             let lPanel = document.getElementById("left-panel");
             let curClass = lPanel.className;
             lPanel.classList.remove(curClass);
 
-            if (avgScore < 2) {
+            if (score < 2) {
                 lPanel.classList.add("very-negative-grad");
-            } else if (avgScore < 4) {
+            } else if (score < 4) {
                 lPanel.classList.add("negative-grad");
-            } else if (avgScore < 6) {
+            } else if (score < 6) {
                 lPanel.classList.add("neutral-grad");
-            } else if (avgScore < 8) {
+            } else if (score < 8) {
                 lPanel.classList.add("positive-grad");
             } else {
                 lPanel.classList.add("very-positive-grad");
             }
         }
+    }
+    function round10(d) {
+        return Math.round(10 * d) / 10;
     }
 })();
