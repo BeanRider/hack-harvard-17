@@ -18,7 +18,7 @@
 
             let player = document.getElementById('player');
             let mr;
-            let handleSuccess = function(stream) {=
+            let handleSuccess = function(stream) {
                 console.log("handleSuccess");
                 mr = new MediaRecorder(stream, {mimeType: "audio/webm;codecs=opus"});
                 mr.ondataavailable = ondataavailable;

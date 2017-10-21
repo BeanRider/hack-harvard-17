@@ -19,7 +19,7 @@
         }
 
         function voiceToText(formData) {
-            var request = {
+            let request = {
                 method: 'POST',
                 url: '/api/voiceToText',
                 data: formData,
