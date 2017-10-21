@@ -4,16 +4,16 @@
         .controller("mainController", mainController);
 
     function mainController(mainService, $location) {
-        let vm = this;
+        var vm = this;
         vm.output = output;
+        vm.voiceToText = voiceToText;
         function init() {
-            output();
         }
 
         init();
         function output() {
-            console.log("in output");
-            let promise = mainService.faceRecon();
+            console.log("in output ");
+            promise = mainService.faceRecon();
             promise.success(function (text) {
                 if (text) {
                     console.log("the text is " + text);
@@ -23,6 +23,9 @@
                 }
             });
 
+        }
+
+        function voiceToText() {
             promise = mainService.voiceToText();
             promise.success(function (text) {
                 if (text) {
@@ -32,7 +35,6 @@
                     vm.error = 'text not found';
                 }
             });
-
             promise = mainService.nlp();
 
         }

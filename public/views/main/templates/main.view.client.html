@@ -5,4 +5,26 @@
 
     <h2>Voice-to-Text</h2>
     <p>Result: {{model.voiceText}}</p>
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="imageUpload">Upload</label>
+                <input ng-model="myfile" type="file" id="imageUpload" name="file" class="form-control"/>
+                <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+                <button ng-click="model.output(myfile)">analyze image</button>
+            </div>
+        </form>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="soundUpload">Upload</label>
+            <input type="file" id="soundUpload" name="file" class="form-control"/>
+            <button type="submit" class="btn btn-block btn-primary">Upload Sound</button>
+            <button ng-click="model.voiceToText()">analyze sound</button>
+        </div>
+
+    </form>
+
 </div>

@@ -17,7 +17,7 @@
             return $http.get("/api/faceRecon");
         }
 
-        function voiceToText() {
+        function voiceToText(file) {
             return $http.get("/api/voiceToText");
         }
 

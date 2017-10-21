@@ -1,6 +1,10 @@
 module.exports = function (app, Speech, fs) {
 
     app.get("/api/voiceToText", voiceToText);
+    const Storage = require('@google-cloud/storage');
+// Instantiate a storage client
+    const storage = Storage();
+    const bucketName = 'convo-buddy-hackharvard';
 
     function voiceToText(req, res) {
         // Instantiates a client
