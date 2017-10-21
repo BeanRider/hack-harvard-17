@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "convobuddy-183601",
+  "private_key_id": "9fe3571ed5e7a007f016d9d3eee7a9ea1bb775f4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCoPoBuL8iLxNIr\nKLLUSTq6saovqnvtcVtt6iUxThVk9PPGSQzJ/YUWXc8QMxbkHdOgSyxaGyThnfuc\nHnxWSHk7A5xWOfcrXZoTNOhz2rPQncd6mXFd84MoXfMNsPOOK8VSImkGSfyrOc4v\nZElEYgxIGV1nTPEvfX+BhHV52cFAMIu1xOkZ5+O/iWjFODqy4FCTHsMxqJnlhJx5\n5uS0DZwwX3SnM/R7zqN02Py5Sd71p6ScFvhgj8UNKV7Bz/oSYOsvVfW9bE804qzR\nS8MoZDh64BtlWDvNuPMnE8atlW/yZGM98+gH6K9nkFBOjtNCoxObDVLDrTZT5Oue\ny1atBB0HAgMBAAECggEADogLdrjo1O2ki3bB72T9zhc/UEuk1Y7Xa0hwevA4F9ay\nYXt4v8+GWbazhj4raXuMBknH5GZ4yoXnMAZQDfHHisnWjHoIN7YncyY8N5l5s3iV\nPKkZKhi4yNlIf3O7rZlpOx1evdzRFobxIJXEYEQptGaAc0YphMUNqMWkkeg1cVI8\nKgOK5rJcLGRsD3WbwLz1tgnlUKy4B0OZBl8y7qFVmcqJE6/cbW+lGb2+8o8VJu0F\nDkFBeS4mSP5fNRFwUTeZfotK2D5r6BkJSbv5OOrEENb1fKrz69bAzLXCH3t6xM8G\nGhwo9AhJxn8Cx8PDzq7QpPlFecoaiR6V2yiVPwCBeQKBgQDdZuNpySa4oG6ReLx5\nZIvMKCM1TwfDVzz9Kri/KUAbzufyXJWz3cUySYTOpDHefUcuZtQRU3G/nIAOs/kk\nTmjlazqIDKAg9x+rEfotN7H6FwEmxaSOMYcdeU7Rl8NTl5IpTRzung/3ps0MNFwD\nQ99moXNMqptmKA+xI6s6wv0RCQKBgQDCiQ3prOmmvAieANAujjlztQMi2wGW2y4r\ndw8nPvJ8U81xl9gF5qS5Cburo0JkMUY1hdyuopUls78gASWUABPZcDkfyajgC5BW\nK+TMGlmC/iJ2dgd0aLhOl2FJmeXRW4gVNiLh+lTqjRohzw3Qik18dRgdhaciOR+x\nkl/KhtYRjwKBgCN5qfS4U2j/49eRVfnJf5Dt2X5gNGk7YD1cjA+tR2VtSMMPzLju\nTvuYxhvqOUdiIXaw6UgBa9d89xPkCIalva8M+Gr2Qu4lSsC5d7GpG+5rozaYMp7K\nFtFFL7jrrVOGlNfjUEB3uS1AX9iVxyyKwpAKTJQ7Pf0nbCRBB925gp0pAoGBAIba\nqXles44w9SxK1gYf87XBOo5UEZL5F9VrsGZ9XW1QTq+7GjZk/7WCCMXf4+s+uTPr\nOuMYs5myNADEqr8hGqF2CTN/AQFnIsSJow7WCU0kTNGf2mUZHwLkL73s4IK0F+7U\nW3QZq/n4nK/pL+NrrHFlXrVAbG7t+ImJNbxYolcDAoGBAMlEwx5nTx+HpCJw0QM5\nCq6OIpfj0fHQx+mDHhdazm47Gj2awhiqxOCFiw1LoC9oWmUNL6y4A8Ue1oeF7xIn\nFBj+kuSqaA38S8mEqnBLKjxotCwHWUFCKni9oa13sw6esWmoYPjMDRPcOO4dZiNW\nY8ypIHUehk5A3U7v4E+SiCXg\n-----END PRIVATE KEY-----\n",
+  "client_email": "hackharvard@convobuddy-183601.iam.gserviceaccount.com",
+  "client_id": "106279378690653015455",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hackharvard%40convobuddy-183601.iam.gserviceaccount.com"
+}

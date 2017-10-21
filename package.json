@@ -4,6 +4,7 @@
   "description": "havardhack",
   "main": "server.js",
   "dependencies": {
+    "@google-cloud/speech": "^0.10.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.1",
     "cookie-parser": "^1.4.3",
