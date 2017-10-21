@@ -30,6 +30,7 @@ module.exports = function (app,Vision) {
 
 
     app.post('/upload', multer.single('file'),upload);
+    app.post('/upload2',upload2);
 
 
     function upload(req, res){
@@ -51,14 +52,40 @@ module.exports = function (app,Vision) {
         next(err);
 });
 
+
+
 /*    blobStream.on('finish', () => {
         // The public URL can be used to directly access the file via HTTP.
         const publicUrl = format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
     //res.status(200).send(publicUrl);
 });*/
 
+    console.log(req.file.buffer);
     blobStream.end(req.file.buffer);
 }
+
+    function upload2(req, res){
+        if (!req.body) {
+            res.status(400).send('No file uploaded.');
+            return;
+        }
+        console.log(req.body);
+
+        // Create a new blob in the bucket and upload the file data.
+        const blob = bucket.file(req.body.originalname);
+        //const blobStream = blob.createWriteStream();
+        const blobStream = blob.createWriteStream({
+            metadata: {
+                contentType: req.body.mimetype
+            }
+        });
+
+        blobStream.on('error', (err) => {
+            next(err);
+    });
+        console.log(req.body.buffer);
+        blobStream.end(req.body.buffer);
+    }
 
     function faceRecon(req, res) {
         storage
@@ -89,6 +116,13 @@ module.exports = function (app,Vision) {
         console.log(`    Anger: ${face.angerLikelihood}`);
         console.log(`    Sorrow: ${face.sorrowLikelihood}`);
         console.log(`    Surprise: ${face.surpriseLikelihood}`);
+    });
+        storage
+            .bucket(bucketName)
+            .file(file.name)
+            .delete()
+            .catch(err => {
+            console.error('ERROR:', err);
     });
         res.send(faces);
     })

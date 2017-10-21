@@ -6,13 +6,17 @@
     <h2>Voice-to-Text</h2>
     <p>Result: {{model.voiceText}}</p>
 
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="snap">Snap Photo</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
         <form action="/upload" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label for="imageUpload">Upload</label>
-                <input ng-model="myfile" type="file" id="imageUpload" name="file" class="form-control"/>
+                <input type="file" id="imageUpload" name="file" class="form-control"/>
                 <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
-                <button ng-click="model.output(myfile)">analyze image</button>
+                <button ng-click="model.output()">analyze image</button>
             </div>
         </form>
 
