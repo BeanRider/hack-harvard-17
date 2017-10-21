@@ -14,15 +14,14 @@
         function output() {
             console.log("in output");
             var promise = mainService.voiceToText();
-            /*promise.success(function (text) {
+            promise.success(function (text) {
                 if (text) {
                     console.log("the text is " + text);
                     vm.text = text;
                 } else {
                     vm.error = 'text not found';
                 }
-            });*/
-            vm.text = promise;
+            });
 
         }
     }

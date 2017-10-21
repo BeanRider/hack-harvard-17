@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-
+const Vision = require('@google-cloud/vision');
 var passport      = require('passport');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
@@ -21,7 +21,7 @@ app.use(passport.session());
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
-//require ("./server/app.js")(app);
+require ("./server/app.js")(app,Vision);
 
 var port = process.env.PORT || 3000;
 
