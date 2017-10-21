@@ -5,6 +5,7 @@
 
     function mainService($http) {
 
+
         var api = {
             voiceToText: voiceToText
         };
@@ -12,9 +13,8 @@
 
 
         function voiceToText() {
-            var text = "text";
-            console.log(text);
-            return text;
+            return $http.get("/api/voiceToText");
+
         }
 
     }
