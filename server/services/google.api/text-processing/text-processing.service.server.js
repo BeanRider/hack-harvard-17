@@ -9,7 +9,7 @@ module.exports = function (app, Nlp){
         const client = new Nlp.LanguageServiceClient();
 
         // The text to analyze
-        const text = 'Hello, world!';
+        const text = 'Hello World';
 
         const document = {
             content: text,
@@ -24,9 +24,49 @@ module.exports = function (app, Nlp){
             .then(results => {
             const sentiment = results[0].documentSentiment;
 
-        console.log(`Text: ${text}`);
-        console.log(`Sentiment score: ${sentiment.score}`);
-        console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
+            var sentimentScore = sentiment.score;
+            console.log("Sentiment score: " + sentimentScore);
+            var sentimentEnum = "";
+
+            if(sentimentScore >= -1 && sentimentScore < -0.625){
+                sentimentEnum = "VERY_NEGATIVE";
+            }
+            else if(sentimentScore >= -0.625 && sentimentScore < -0.25){
+                sentimentEnum = "NEGATIVE";
+            }
+            else if(sentimentScore >= -0.25 && sentimentScore < 0.25){
+                sentimentEnum = "NEUTRAL";
+            }
+            else if(sentimentScore >= 0.25 && sentimentScore < 0.625){
+                sentimentEnum = "POSITIVE";
+            }
+            else{
+                sentimentEnum = "VERY POSITIVE";
+            }
+
+            var sentimentMagnitude = sentiment.magnitude;
+            console.log("Sentiment magnitude: " + sentimentMagnitude);
+            var accuracyConfidence = "";
+
+            if(sentimentMagnitude > 4){
+                accuracyConfidence = "VERY_CONFIDENT";
+            }
+            else if(sentimentMagnitude > 2.5){
+                accuracyConfidence = "CONFIDENT";
+            }
+            else if(sentimentMagnitude > 1){
+                accuracyConfidence = "NEUTRAL";
+            }
+            else{
+                accuracyConfidence = "NOT_CONFIDENT";
+            }
+
+        // console.log("SentimentEnum: " + sentimentEnum);
+        // console.log("AccuracyConfidence" + accuracyConfidence);
+
+        var response = {sentimentEnumRes: sentimentEnum, accuracyConfidenceRes : accuracyConfidence};
+
+        res.send(response);
     })
     .catch(err => {
             console.error('ERROR:', err);
