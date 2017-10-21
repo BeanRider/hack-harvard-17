@@ -8,7 +8,8 @@
 
         var api = {
             faceRecon: faceRecon,
-            voiceToText: voiceToText
+            voiceToText: voiceToText,
+            nlp: nlp
         };
         return api;
 
@@ -18,6 +19,10 @@
 
         function voiceToText() {
             return $http.get("/api/voiceToText");
+        }
+
+        function nlp(){
+            return $http.get("/api/nlp");
         }
 
 

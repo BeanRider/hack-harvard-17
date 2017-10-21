@@ -32,6 +32,9 @@
                     vm.error = 'text not found';
                 }
             });
+
+            promise = mainService.nlp();
+
         }
     }
 })();
