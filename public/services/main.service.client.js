@@ -16,10 +16,17 @@
             return $http.get("/api/faceRecon");
         }
 
-        function voiceToText() {
-            return $http.get("/api/voiceToText");
+        function voiceToText(formData) {
+            var request = {
+                method: 'POST',
+                url: '/api/voiceToText',
+                data: formData,
+                headers: {
+                    'Content-Type': undefined
+                }
+            };
+            return $http(request);
         }
-
 
     }
 })();
