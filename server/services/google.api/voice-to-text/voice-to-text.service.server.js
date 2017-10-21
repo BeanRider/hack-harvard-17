@@ -1,17 +1,13 @@
-const fs = require('fs');
-// Imports the Google Cloud client library
-const Speech = require('@google-cloud/speech');
-
 module.exports = function (app, Speech, fs) {
 
-    app.get("/api/speechToTest", speechToText);
+    app.get("/api/voiceToText", voiceToText);
 
-    function speechToText(req, res) {
+    function voiceToText(req, res) {
         // Instantiates a client
         const speech = Speech();
 
         // The path to the local file on which to perform speech recognition, e.g. /path/to/audio.raw
-        const filename = "test.flac";
+        const filename = "server/services/google.api/voice-to-text/test.flac";
 
         // The encoding of the audio file, e.g. 'LINEAR16'
         const encoding = 'FLAC';

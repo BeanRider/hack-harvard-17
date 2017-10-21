@@ -1,11 +1,16 @@
-var express = require('express');
-var app = express();
-const Vision = require('@google-cloud/vision');
-var passport      = require('passport');
-var cookieParser  = require('cookie-parser');
-var session       = require('express-session');
+const express = require('express');
+const app = express();
 
-var bodyParser = require('body-parser');
+// Imports the Google Cloud client library
+const Vision = require('@google-cloud/vision');
+const Speech = require('@google-cloud/speech');
+
+const fs = require('fs');
+const passport = require('passport');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -21,7 +26,7 @@ app.use(passport.session());
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
-require ("./server/app.js")(app,Vision);
+require ("./server/app.js")(app, Vision, Speech, fs);
 
 var port = process.env.PORT || 3000;
 

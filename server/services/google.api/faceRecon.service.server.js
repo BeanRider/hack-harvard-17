@@ -1,8 +1,8 @@
 module.exports = function (app,Vision) {
 
-    app.get("/api/voiceToText", voiceToText);
+    app.get("/api/faceRecon", faceRecon);
 
-    function voiceToText(req, res) {
+    function faceRecon(req, res) {
 
     // Instantiates clients
         const vision = Vision();
