@@ -8,7 +8,9 @@
 
         var api = {
             faceRecon: faceRecon,
-            voiceToText: voiceToText
+            voiceToText: voiceToText,
+            nlp: nlp,
+            upload2:upload2
         };
         return api;
 
@@ -17,7 +19,7 @@
         }
 
         function voiceToText(formData) {
-            var request = {
+            let request = {
                 method: 'POST',
                 url: '/api/voiceToText',
                 data: formData,
@@ -27,6 +29,15 @@
             };
             return $http(request);
         }
+
+        function nlp(){
+            return $http.get("/api/nlp");
+        }
+
+        function upload2(file) {
+            return $http.post("/upload2",file);
+        }
+
 
     }
 })();

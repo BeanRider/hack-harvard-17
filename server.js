@@ -4,6 +4,7 @@ const app = express();
 // Imports the Google Cloud client library
 const Vision = require('@google-cloud/vision');
 const Speech = require('@google-cloud/speech');
+const Nlp = require('@google-cloud/language');
 
 const fs = require('fs');
 const passport = require('passport');
@@ -26,7 +27,8 @@ app.use(passport.session());
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
-require ("./server/app.js")(app, Vision, Speech, fs);
+require ("./server/app.js")(app, Vision, Speech, fs, Nlp);
+
 
 var port = process.env.PORT || 3000;
 

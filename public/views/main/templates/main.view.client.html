@@ -1,12 +1,45 @@
 <div>
-    <h1>Page under construction.</h1>
-    <h2>Face Recon:</h2>
-    <p>text is {{model.faceText}}</p>
+    <h1>Click a photo and upload it to analyze the emotion.</h1>
 
-    <h2>Voice-to-Text</h2>
-    <p>Result: {{model.voiceText}}</p>
+    <video id="video" width="640" height="480" autoplay></video>
+
+    <a href="#" class="button" id="snap" download="convo-buddy.jpg">Snap Photo</a>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="imageUpload">Upload</label>
+                <input type="file" id="imageUpload" name="file" class="form-control"/>
+                <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+                <button ng-click="model.output()">analyze image</button>
+            </div>
+        </form>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="soundUpload">Upload</label>
+            <input type="file" id="soundUpload" name="file" class="form-control"/>
+            <button type="submit" class="btn btn-block btn-primary">Upload Sound</button>
+            <button ng-click="model.voiceToText()">analyze sound</button>
+        </div>
+
+    </form>
 
     <audio id="player" controls></audio>
     <a id="download">Download</a>
-    <!--<input id="recorder" type="file" accept="audio/*" capture />-->
+
+    <div>
+        <h1> OUTPUT:</h1>
+        <h2>Face Recon:</h2>
+        <h2>CONFIDENCE: {{model.faceText}}</h2>
+        <h2>JOY: {{model.faceText.joyLikelihood}}</h2>
+        <h2>ANGER: {{model.faceText.angerLikelihood}}</h2>
+        <h2>SORROW: {{model.faceText.sorrowLikelihood}}</h2>
+        <h2>SURPRISE: {{model.faceText.surpriseLikelihood}}</h2>
+
+        <h2>Voice-to-Text</h2>
+        <p>Result: {{model.voiceText}}</p>
+    </div>
 </div>
