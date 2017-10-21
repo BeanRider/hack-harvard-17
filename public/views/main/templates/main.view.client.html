@@ -1,7 +1,19 @@
 <div>
-    <h1>Click a photo and upload it to analyze the emotion.</h1>
 
-    <video id="video" width="640" height="480" autoplay></video>
+    <div id="top-bar">
+        <div id="logo">
+            <img src="views/images/logo.png" height="80px"/>
+            <p>ConvoBuddy</p>
+        </div>
+    </div>
+    <div id="loading">
+        <div><h1>generating report...</h1></div>
+    </div>
+    <div id="content-wrapper">
+
+        <h3>Click a photo and upload it to analyze the emotion.</h3>
+
+        <video id="video" width="640" height="480" autoplay></video>
 
     <a href="" ng-click="model.take_snap()" class="button" id="snap" download="convo-buddy.jpg">Snap Photo</a>
     <button id="record" ng-click="model.startLoop()">Record</button>
@@ -10,8 +22,8 @@
 
     <button ng-click="model.output()">analyze image</button>
 
-    <audio id="player" controls></audio>
-    <a id="download">Download</a>
+        <audio id="player" controls></audio>
+        <a id="download">Download</a>
 
     <div class="container-fluid">
         <h1> OUTPUT:</h1>

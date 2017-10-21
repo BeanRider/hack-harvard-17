@@ -3,7 +3,7 @@
         .module("convobuddy")
         .controller("mainController", mainController);
 
-    function mainController(mainService, $location) {
+    function mainController(mainService, $location, $window) {
         var vm = this;
         vm.image_counter = 0;
         vm.output = output;
@@ -21,6 +21,10 @@
         var snap = document.getElementById("snap");
 
         function init() {
+            document.getElementById("logo").onclick = function () {
+                $window.location.href = '/#/results';
+            };
+
             var buffer = [];
             function ondataavailable(e) {
                 console.log("reach");
@@ -87,6 +91,7 @@
                             if (text) {
                                 console.log("the text is " + text);
                                 vm.voiceText = text;
+                                $rootScope.voiceToText = text;
                             } else {
                                 vm.error = 'text not found';
                             }

@@ -1,0 +1,228 @@
+#top-bar {
+    width: 100%;
+    height: 116px;
+    -webkit-box-shadow: 0px 2px 23px 0px rgba(0,0,0,0.20);
+    -moz-box-shadow: 0px 2px 23px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 23px 0px rgba(0,0,0,0.20);
+}
+
+*, html {
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background: #F9F9F9;
+}
+
+#logo {
+    font-size: 42px;
+    font-weight: bolder;
+    height: 100%;
+    vertical-align: middle;
+    margin-left: 48px;
+    color: #D12F2F;
+}
+
+#logo > img {
+    float:left;
+    display: block;
+    line-height: 116px;
+    vertical-align: middle;
+    height: 100%;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#logo > p {
+    display: block;
+    line-height: 116px;
+    vertical-align: middle;
+}
+
+#left-panel {
+    height: 908px;
+    width: 381px;
+    margin-left:-381px;
+    float:left;
+    background-color: #1e1e1e;
+    padding-top: 56px;
+}
+
+.very-negative-grad {
+    background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.negative-grad {
+    background: -webkit-linear-gradient(to top, #F3F9A7, #CAC531);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #F3F9A7, #CAC531); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.neutral-grad {
+    background: -webkit-linear-gradient(to bottom, #5B86E5, #36D1DC);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #5B86E5, #36D1DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.positive-grad {
+    background: -webkit-linear-gradient(to bottom, #11998e, #38ef7d); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #11998e, #38ef7d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.very-positive-grad {
+    background: -webkit-linear-gradient(to top, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+
+
+.score {
+    width: 190px;
+    height: 190px;
+    font-weight: bolder;
+    color: white;
+    font-size: 80px;
+    text-align: center;
+
+    border-radius: 50%;
+    /*behavior: url(PIE.htc); !* remove if you don't care about IE8 *!*/
+
+    /*padding: 8px;*/
+
+    margin: 0 auto;
+    background: none;
+    border: 10px solid white;
+}
+
+.score > p {
+    display: block;
+    line-height: 180px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+h1 {
+    font-size: 38px;
+    font-weight: bolder;
+    color: #4D4D4D;
+}
+
+#menu-title {
+    color: white;
+    font-weight: 100;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.score-wrapper {
+    margin-bottom: 125px;
+}
+
+.score > h2 {
+    margin-top: 30px;
+    margin-bottom: 90px;
+    color: #f4f4f4;
+}
+
+#content-wrapper {
+    margin-left: 381px;
+}
+
+#right-panel {
+    float:right;
+    width: 100%;
+    padding-left: 56px;
+    padding-right: 56px;
+    padding-top:56px;
+}
+
+#tabs > div {
+    min-width: 180px;
+    text-align: center;
+    padding: 12px;
+    margin-right: 15px;
+    display: inline-block;
+    background-color: #FFF;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 2px 23px 0px rgba(0,0,0,0.20);
+    -moz-box-shadow: 0px 2px 23px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 23px 0px rgba(0,0,0,0.20);
+}
+#tabs > div > a {
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+}
+
+#tabs > div.selected {
+    background-color: #D12F2F;
+}
+
+#tabs > div.selected > a {
+    color: white;
+}
+
+#tabs > div.selected:hover {
+    background-color: #D12F2F;
+    color: white;
+}
+
+#tabs > div:hover {
+    color: #4D4D4D;
+    background: #efefef;
+}
+
+#tabs > div > a:hover {
+    text-decoration: none;
+}
+#tabs > div:active {
+    text-decoration: none;
+    color: black;
+    background: #FFF;
+}
+
+#tabs {
+    margin-top: 44px;
+    margin-bottom: 44px;
+}
+
+@keyframes flickerAnimation { /* flame pulses */
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+#loading {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: #111111;
+    opacity: 0.75;
+    display: none;
+}
+
+#loading > div {
+    height: 200px;
+    width: 800px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -400px;
+    text-align: center;
+    animation: flickerAnimation 1.5s infinite;
+}
+
+#loading > div > h1 {
+    font-size: 70px;
+    color: white;
+}
