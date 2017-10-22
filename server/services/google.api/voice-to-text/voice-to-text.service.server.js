@@ -73,7 +73,7 @@ module.exports = function (app, Speech, fs) {
                             if (err) {
                                 console.log("about to send 500");
                                 res.send(500);
-                            } else {
+                             } else {
                                 console.log("about to send data");
                                 res.send(data);
                             }
