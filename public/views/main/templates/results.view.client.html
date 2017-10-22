@@ -47,6 +47,18 @@
                     <div><h4>SURPRISE {{model.emotionScores.surprise}}%</h4><div class="bar" id="surprise"></div></div>
                 </div>
             </div>
+
+            <div>
+                <div class="container-fluid">
+                    <canvas id="pie" class="chart chart-pie"
+                            chart-data="model.data" chart-labels="model.labels" chart-options="options">
+                    </canvas>
+                </div>
+
+                <h2>Voice-to-Text</h2>
+                <p>Result: {{model.voiceText}}</p>
+            </div>
+
         </div>
     </div>
 </div>

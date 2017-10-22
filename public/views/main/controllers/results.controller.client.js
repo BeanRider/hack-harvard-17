@@ -6,6 +6,9 @@
     function resultsController(mainService, $rootScope) {
         let vm = this;
 
+        vm.voiceToText = $rootScope.voiceToText;
+        vm.data = $rootScope.data;
+        vm.labels = $rootScope.labels;
 
         function init() {
             vm.transcript = "Can I use PayPal to receive the card? Maybe I can, maybe I can not. Why are you trying to ask me for information? I think you are rude.";
