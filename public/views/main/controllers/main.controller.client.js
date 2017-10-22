@@ -3,7 +3,7 @@
         .module("convobuddy")
         .controller("mainController", mainController);
 
-    function mainController(mainService, $location, $window, $rootScope) {
+    function mainController(mainService, $location, $window, $rootScope,$route) {
         var vm = this;
         vm.fullname = "Guest";
         vm.image_counter = 0;
@@ -98,8 +98,13 @@
 
                                     return mainService.nlp(vm.voiceText);
                                 } else {
-                                    vm.error = 'text not found';
-                                    throw Error(vm.error);
+                                    vm.error = 'not able to record properly..please try again';
+                                    var retVal = confirm("Not able to record properly..reload ?");
+                                    if( retVal == true ){
+                                        $window.location.reload();
+                                        }
+                            else{
+                                    throw Error(vm.error);}
                                 }
                             })
                             .then((data) => {
