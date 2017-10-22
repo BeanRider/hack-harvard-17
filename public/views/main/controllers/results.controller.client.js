@@ -9,9 +9,7 @@
         vm.voiceToText = $rootScope.voiceToText;
 
         function init() {
-
             initHolisticScores();
-
         }
 
         init();
