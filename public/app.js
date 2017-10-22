@@ -1,5 +1,5 @@
 (function () {
     angular
-        .module("convobuddy", ["ngRoute"]);
+        .module("convobuddy", ["ngRoute",'chart.js']);
 
 })();
