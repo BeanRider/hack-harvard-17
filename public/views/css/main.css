@@ -333,3 +333,13 @@ div.bar {
     height: 25px;
     border-radius: 12px;
 }
+
+#holistic-emotions-wrapper {
+    float: left;
+    width: 50%;
+}
+
+#pie-wrapper {
+    float: right;
+    width: 50%;
+}

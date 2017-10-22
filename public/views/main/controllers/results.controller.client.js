@@ -3,12 +3,17 @@
         .module("convobuddy")
         .controller("resultsController", resultsController);
 
-    function resultsController(mainService, $rootScope) {
+    function resultsController(mainService, $rootScope, $window) {
         let vm = this;
 
         vm.voiceToText = $rootScope.voiceToText;
         vm.data = $rootScope.data;
         vm.labels = $rootScope.labels;
+        vm.logoClick = logoClick;
+
+        function logoClick() {
+            $window.location.href = '/#/main';
+        }
 
         function init() {
             vm.transcript = "Can I use PayPal to receive the card? Maybe I can, maybe I can not. Why are you trying to ask me for information? I think you are rude.";

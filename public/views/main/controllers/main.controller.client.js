@@ -5,7 +5,7 @@
 
     function mainController(mainService, $location, $window, $rootScope) {
         var vm = this;
-        vm.fullname = "Jeffrey Weng";
+        vm.fullname = "Guest";
         vm.image_counter = 0;
         vm.output = output;
         vm.startLoop = startLoop;
@@ -19,6 +19,13 @@
 
         // Trigger photo take
         var snap = document.getElementById("snap");
+
+        vm.logoClick = logoClick;
+
+        function logoClick() {
+            $window.location.href = '/#/main';
+        }
+
 
         function startAudioRecording() {
             let buffer = [];
@@ -226,8 +233,9 @@
 
         // STARTS and Resets the loop if any
         function startLoop() {
-
-            myInterval = setInterval(Function("document.getElementById(\"snap\").click();"), 10000);
+            myInterval = setInterval(function() {
+                take_snap();
+            }, 5000);
         }
 
         function stopLoop() {

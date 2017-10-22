@@ -1,6 +1,6 @@
 <div>
     <div id="top-bar">
-        <div id="logo">
+        <div ng-click="model.logoClick()" id="logo">
             <img src="views/images/logo.png" height="80px"/>
             <p>ConvoBuddy</p>
         </div>
@@ -18,7 +18,7 @@
             <div class="score-wrapper">
                 <div class="face score">
                     <p id="holistic-face" class="vertical-center">{{model.holisticScoreFace}}</p>
-                    <h2>Face</h2>
+                    <h2>Most Used Face</h2>
                 </div>
             </div>
         </div>
@@ -37,9 +37,9 @@
                 <p><i class="light-grey">{{model.transcript}}</i></p>
             </div>
 
-            <div>
+            <div id="holistic-emotions-wrapper" class="details-section">
                 <h2>Holistic Emotions</h2>
-                <p><i class="light-grey">Derived from all {{model.numFace}} faces seen throughout the meeting.</i></p>
+                <p><i class="light-grey">Derived from all faces seen throughout this meeting.</i></p>
                 <div id="expressions">
                     <div><h4>JOY {{model.emotionScores.joy}}%</h4><div class="bar" id="joy"></div></div>
                     <div><h4>ANGER {{model.emotionScores.anger}}%</h4><div class="bar" id="anger"></div></div>
@@ -48,15 +48,13 @@
                 </div>
             </div>
 
-            <div>
+            <div id="pie-wrapper" class="details-section">
+                <h2>Pie Chart</h2>
                 <div class="container-fluid">
                     <canvas id="pie" class="chart chart-pie"
                             chart-data="model.data" chart-labels="model.labels" chart-options="options">
                     </canvas>
                 </div>
-
-                <h2>Voice-to-Text</h2>
-                <p>Result: {{model.voiceText}}</p>
             </div>
 
         </div>
