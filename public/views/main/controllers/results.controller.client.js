@@ -7,6 +7,8 @@
         let vm = this;
 
         vm.voiceToText = $rootScope.voiceToText;
+        vm.data = $rootScope.data;
+        vm.labels = $rootScope.labels;
 
         function init() {
             initHolisticScores();

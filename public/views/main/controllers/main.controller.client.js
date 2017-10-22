@@ -171,9 +171,9 @@
                     vm.anger_score = anger/(5*vm.faceText.length);
                     vm.sorrow_score = sorrow/(5*vm.faceText.length);
                     vm.surprise_score = surprise/(5*vm.faceText.length);
-                    vm.data = [vm.joy_score, vm.anger_score, vm.sorrow_score,vm.surprise_score];
+                    $rootScope.data = [vm.joy_score, vm.anger_score, vm.sorrow_score,vm.surprise_score];
                     //vm.labels =['Red', 'Yellow','Blue','Green'];
-                    vm.labels =['Joy', 'Anger','sorrow','surprise'];
+                    $rootScope.labels =['Joy', 'Anger','sorrow','surprise'];
                 } else {
                     vm.error = 'text not found';
                 }

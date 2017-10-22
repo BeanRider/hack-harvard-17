@@ -32,13 +32,11 @@
                 <div id="you-tab"><a>You</a></div>
             </div>
             <div>
-                <h1> OUTPUT:</h1>
-                <h2>Face Recon:</h2>
-                <h2>CONFIDENCE: {{model.faceText}}</h2>
-                <h2>JOY: {{model.faceText.joyLikelihood}}</h2>
-                <h2>ANGER: {{model.faceText.angerLikelihood}}</h2>
-                <h2>SORROW: {{model.faceText.sorrowLikelihood}}</h2>
-                <h2>SURPRISE: {{model.faceText.surpriseLikelihood}}</h2>
+                <div class="container-fluid">
+                    <canvas id="pie" class="chart chart-pie"
+                            chart-data="model.data" chart-labels="model.labels" chart-options="options">
+                    </canvas>
+                </div>
 
                 <h2>Voice-to-Text</h2>
                 <p>Result: {{model.voiceText}}</p>
