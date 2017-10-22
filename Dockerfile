@@ -1,6 +1,6 @@
 FROM gcr.io/google-appengine/nodejs
 
-RUN apt-get install software-properties-common
+RUN sudo apt-get install software-properties-common
 
 RUN sudo add-apt-repository ppa:mc3man/trusty-media
 
