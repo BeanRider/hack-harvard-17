@@ -156,10 +156,51 @@
                 if (text) {
                     console.log("the text is " + text);
                     vm.faceText = text;
+                    var joy = 0;
+                    var anger = 0;
+                    var sorrow = 0;
+                    var surprise = 0;
+                    for(i=0;i<vm.faceText.length;i++){
+                        confidence = vm.faceText[i].detectionConfidence;
+                        joy = joy + (generate_sentiment_score(vm.faceText[i].joyLikelihood) * confidence);
+                        anger = anger + (generate_sentiment_score(vm.faceText[i].angerLikelihood) * confidence);
+                        sorrow = sorrow + (generate_sentiment_score(vm.faceText[i].sorrowLikelihood) * confidence);
+                        surprise = surprise + (generate_sentiment_score(vm.faceText[i].surpriseLikelihood) * confidence);
+                    }
+                    vm.joy_score = joy/(5*vm.faceText.length);
+                    vm.anger_score = anger/(5*vm.faceText.length);
+                    vm.sorrow_score = sorrow/(5*vm.faceText.length);
+                    vm.surprise_score = surprise/(5*vm.faceText.length);
+                    vm.data = [vm.joy_score, vm.anger_score, vm.sorrow_score,vm.surprise_score];
+                    //vm.labels =['Red', 'Yellow','Blue','Green'];
+                    vm.labels =['Joy', 'Anger','sorrow','surprise'];
                 } else {
                     vm.error = 'text not found';
                 }
             });
+        }
+
+        function generate_sentiment_score(sentiment){
+            var score;
+            if(sentiment == "VERY_LIKELY"){
+                score = 5;
+            }
+            else if(sentiment == "LIKELY"){
+                score = 4;
+            }
+            else if(sentiment == "POSSIBLE"){
+                score = 3;
+            }
+            else if(sentiment == "UNLIKELY"){
+                score = 2;
+            }
+            else if(sentiment == "VERY_UNLIKELY"){
+                score = 1;
+            }
+            else if(sentiment == "UNKNOWN"){
+                score = 0;
+            }
+            return score;
         }
 
 // STARTS and Resets the loop if any
