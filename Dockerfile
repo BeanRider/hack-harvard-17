@@ -1,5 +1,7 @@
 FROM node:boron
 
+sudo apt-get update
+sudo apt-get install -y libav-tools
 # Install app dependencies
 COPY package.json .
 # For npm@5 or later, copy package-lock.json as well
