@@ -26,7 +26,6 @@
             $window.location.href = '/#/main';
         }
 
-
         function startAudioRecording() {
             let buffer = [];
             function ondataavailable(e) {
@@ -77,6 +76,7 @@
 
             let hasSent = false;
             function sendAudioForProcessing() {
+                mr.stop();
                 bufferToDataUrl(function(dataUrl) {
                     let file = dataUrlToFile(dataUrl);
                     console.log(file);
@@ -167,15 +167,19 @@
             vm.startLoop();
 
             vm.endMeeting = function() {
+                document.getElementById("loading").style.visibility = "visible";
+                document.getElementById("record-status").style.visibility = "hidden";
+                stopLoop();
                 sendAudioForProcessing();
             };
         }
 
-        function init() {
+        vm.startSession = startSession;
+        function startSession() {
+            document.getElementById("start-overlay").style.visibility = "hidden";
 
             // Audio Recording
             startAudioRecording();
-
 
             var video = document.getElementById('video');
             // Get access to the camera!
@@ -187,19 +191,10 @@
                     video.play();
                 });
             }
+        }
 
-           /* snap.addEventListener("click", function () {
-                context.drawImage(video, 0, 0, 640, 480);
-                image_counter = image_counter + 1;
-                dataURL = canvas.toDataURL("image/jpeg",0.85);
-                var file = dataUrlToImage(dataURL,image_counter);
-                var formData = new FormData();
-                formData.append('file', file, file.name);
-                mainService.upload(formData);
-            });*/
-
-
-
+        function init() {
+            document.getElementById("loading").style.visibility = "hidden";
         }
         init();
 
@@ -237,7 +232,7 @@
             // myInterval = setInterval(function() {
             //     take_snap();
             // }, 5000);
-            myInterval = setInterval(Function("document.getElementById(\"snap\").click();"), 10000);
+            myInterval = setInterval(Function("document.getElementById(\"snap\").click();"), 3000);
         }
 
         function stopLoop() {
@@ -258,6 +253,11 @@
         function take_snap() {
             context.drawImage(video, 0, 0, 640, 480);
             vm.image_counter = vm.image_counter + 1;
+
+            if (vm.image_counter > 8) {
+                vm.endMeeting();
+            }
+
             console.log(vm.image_counter);
             dataURL = canvas.toDataURL("image/jpeg",0.85);
             var file = dataUrlToImage(dataURL,vm.image_counter);

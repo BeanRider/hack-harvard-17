@@ -1,4 +1,13 @@
 <div>
+    <div id="start-overlay">
+        <div id="start-overlay-wrapper">
+        <h1>Welcome to ConvoBuddy!</h1>
+        <h2>To start your meeting, press the button bellow.</h2>
+        <h4 id="tip">For best results, please speak for more than *10 seconds* clearly and loudly in the microphone, and face your web cam.
+            Make sure you have microphone and web cam access in your browser!</h4>
+        <a id="start-session-btn" ng-click="model.startSession()"><h3>Start Session as Guest</h3></a>
+        </div>
+    </div>
 
     <div id="top-bar">
         <div id="logo" ng-click="model.logoClick()">
@@ -11,6 +20,8 @@
         <div><h1>generating report...</h1></div>
     </div>
     <div id="content-wrapper">
+
+
 
         <h2 id="record-status">⬤<b>&nbsp;&nbsp;Live</b></h2>
         <div class="web-cam"><video id="video" width="500" height="500" autoplay></video></div>
