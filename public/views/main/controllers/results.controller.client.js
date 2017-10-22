@@ -6,17 +6,31 @@
     function resultsController(mainService, $rootScope) {
         let vm = this;
 
-        vm.voiceToText = $rootScope.voiceToText;
 
         function init() {
+            vm.transcript = "Can I use PayPal to receive the card? Maybe I can, maybe I can not. Why are you trying to ask me for information? I think you are rude.";
+            if ($rootScope.transcript) {
+                vm.transcript = $rootScope.transcript;
+            }
             initHolisticScores();
+
+            vm.emotionScores = $rootScope.emotionScores;
+            Object.keys(vm.emotionScores).forEach(function(k) {
+                let newWidth = (round10(vm.emotionScores[k]*800)) + "px";
+                console.log("newWidth = " + newWidth);
+                vm.emotionScores[k] = round10(vm.emotionScores[k]*100);
+                document.getElementById(k).style.width = newWidth;
+            });
         }
 
         init();
 
         function initHolisticScores() {
             vm.holisticScoreLanguage = round10($rootScope.holisticScoreLanguage);
-            vm.holisticScoreFace = $rootScope.holisticScoreFace;
+            vm.holisticScoreFace = "N/A";
+            if ($rootScope.holisticScoreFace) {
+                vm.holisticScoreFace = $rootScope.holisticScoreFace;
+            }
 
             // Set color based on language score
             let score = vm.holisticScoreLanguage;

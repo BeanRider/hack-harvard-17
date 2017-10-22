@@ -94,7 +94,7 @@ module.exports = function (app, Speech, fs) {
 
     function convertToFlac(fPath, dPath, done, err) {
         console.log("in convertToFlac");
-        let cmd = `avconv -i ${fPath} ${dPath}`;
+        let cmd = `ffmpeg -i ${fPath} ${dPath}`;
 
         const task = exec(cmd, done);
         task.stdout.on('data', done);

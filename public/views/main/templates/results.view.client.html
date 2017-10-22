@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="score-wrapper">
-                <div class="score">
+                <div class="face score">
                     <p id="holistic-face" class="vertical-center">{{model.holisticScoreFace}}</p>
                     <h2>Face</h2>
                 </div>
@@ -31,17 +31,21 @@
                 <div id="faces-tab "><a>Faces</a></div>
                 <div id="you-tab"><a>You</a></div>
             </div>
-            <div>
-                <h1> OUTPUT:</h1>
-                <h2>Face Recon:</h2>
-                <h2>CONFIDENCE: {{model.faceText}}</h2>
-                <h2>JOY: {{model.faceText.joyLikelihood}}</h2>
-                <h2>ANGER: {{model.faceText.angerLikelihood}}</h2>
-                <h2>SORROW: {{model.faceText.sorrowLikelihood}}</h2>
-                <h2>SURPRISE: {{model.faceText.surpriseLikelihood}}</h2>
 
-                <h2>Voice-to-Text</h2>
-                <p>Result: {{model.voiceText}}</p>
+            <div id="transcript-wrapper" class="details-section">
+                <h2>Transcript</h2>
+                <p><i class="light-grey">{{model.transcript}}</i></p>
+            </div>
+
+            <div>
+                <h2>Holistic Emotions</h2>
+                <p><i class="light-grey">Derived from all {{model.numFace}} faces seen throughout the meeting.</i></p>
+                <div id="expressions">
+                    <div><h4>JOY {{model.emotionScores.joy}}%</h4><div class="bar" id="joy"></div></div>
+                    <div><h4>ANGER {{model.emotionScores.anger}}%</h4><div class="bar" id="anger"></div></div>
+                    <div><h4>SORROW {{model.emotionScores.sorrow}}%</h4><div class="bar" id="sorrow"></div></div>
+                    <div><h4>SURPRISE {{model.emotionScores.surprise}}%</h4><div class="bar" id="surprise"></div></div>
+                </div>
             </div>
         </div>
     </div>

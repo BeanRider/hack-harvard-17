@@ -17,12 +17,11 @@
         var context = canvas.getContext('2d');
         var video = document.getElementById('video');
 
-// Trigger photo take
+        // Trigger photo take
         var snap = document.getElementById("snap");
 
-        function init() {
-
-            var buffer = [];
+        function startAudioRecording() {
+            let buffer = [];
             function ondataavailable(e) {
                 console.log("reach");
                 if (e && e.data)
@@ -57,10 +56,10 @@
             }
 
             function dataUrlToFile(dataUrl) {
-                var binary = atob(dataUrl.split(',')[1]),
+                let binary = atob(dataUrl.split(',')[1]),
                     data = [];
 
-                for (var i = 0; i < binary.length; i++)
+                for (let i = 0; i < binary.length; i++)
                     data.push(binary.charCodeAt(i));
 
                 return new File([new Uint8Array(data)], 'recorded.webm', {
@@ -68,8 +67,8 @@
                 });
             }
 
-            let hasSent = false;
 
+            let hasSent = false;
             function sendAudioForProcessing() {
                 bufferToDataUrl(function(dataUrl) {
                     let file = dataUrlToFile(dataUrl);
@@ -88,7 +87,7 @@
                                     vm.voiceText = text.data[0].alternatives[0].transcript;
                                     console.log("the transcript is " + vm.voiceText);
 
-                                    $rootScope.voiceToText = text;
+                                    $rootScope.transcript = vm.voiceText;
 
                                     return mainService.nlp(vm.voiceText);
                                 } else {
@@ -98,31 +97,79 @@
                             })
                             .then((data) => {
                                 $rootScope.holisticScoreLanguage = parseFloat(data.data.sentimentScore);
-                                // $rootScope.holisticScoreLanguage = 10*Math.random();
-                                $rootScope.holisticScoreFace = "Joy";
-
                                 console.log("nlp: " + data.data + ", score = " + data.data.sentimentScore);
-                                $window.location.href = '/#/results';
 
+                                vm.stopLoop();
+                                return vm.output();
+                            })
+                            .then((data) => {
+                                let text = data.data;
+                                if (text) {
+                                    console.log("the text is " + text);
+                                    vm.faceText = text;
+                                    let joy = 0;
+                                    let anger = 0;
+                                    let sorrow = 0;
+                                    let surprise = 0;
+                                    for(let i = 0; i < vm.faceText.length; i++){
+                                        let confidence = vm.faceText[i].detectionConfidence;
+                                        joy = joy + (generate_sentiment_score(vm.faceText[i].joyLikelihood) * confidence);
+                                        anger = anger + (generate_sentiment_score(vm.faceText[i].angerLikelihood) * confidence);
+                                        sorrow = sorrow + (generate_sentiment_score(vm.faceText[i].sorrowLikelihood) * confidence);
+                                        surprise = surprise + (generate_sentiment_score(vm.faceText[i].surpriseLikelihood) * confidence);
+                                    }
+                                    vm.joy_score = joy/(5*vm.faceText.length);
+                                    vm.anger_score = anger/(5*vm.faceText.length);
+                                    vm.sorrow_score = sorrow/(5*vm.faceText.length);
+                                    vm.surprise_score = surprise/(5*vm.faceText.length);
+
+                                    $rootScope.emotionScores = {
+                                        "joy": vm.joy_score,
+                                        "anger": vm.anger_score,
+                                        "sorrow": vm.sorrow_score,
+                                        "surprise": vm.surprise_score,
+                                    };
+
+                                    $rootScope.holisticScoreFace = Object.keys($rootScope.emotionScores).reduce(
+                                        function(a, b){
+                                            return $rootScope.emotionScores[a] > $rootScope.emotionScores[b] ? a : b
+                                        });
+
+
+                                    vm.data = [vm.joy_score, vm.anger_score, vm.sorrow_score,vm.surprise_score];
+                                    //vm.labels =['Red', 'Yellow','Blue','Green'];
+                                    vm.labels =['Joy', 'Anger','Sorrow','Surprise'];
+                                } else {
+                                    vm.error = 'text not found';
+                                    throw Error(vm.error);
+                                }
+                            })
+                            .then((data) => {
+                                $window.location.href = '/#/results';
                             })
                             .catch((err) => {
                                 console.error('ERROR:', err);
                             });
                     }
-
                 });
             }
-
-            vm.endMeeting = function() {
-                sendAudioForProcessing();
-
-            };
-
             navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 .then(handleSuccess);
 
-            var video = document.getElementById('video');
+            vm.startLoop();
 
+            vm.endMeeting = function() {
+                sendAudioForProcessing();
+            };
+        }
+
+        function init() {
+
+            // Audio Recording
+            startAudioRecording();
+
+
+            var video = document.getElementById('video');
             // Get access to the camera!
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 // Not adding `{ audio: true }` since we only want video now
@@ -141,8 +188,8 @@
                 var formData = new FormData();
                 formData.append('file', file, file.name);
                 mainService.upload(formData);
-
             });*/
+
 
 
         }
@@ -151,33 +198,7 @@
 
         function output() {
             console.log("in output ");
-            let promise = mainService.faceRecon();
-            promise.success(function (text) {
-                if (text) {
-                    console.log("the text is " + text);
-                    vm.faceText = text;
-                    var joy = 0;
-                    var anger = 0;
-                    var sorrow = 0;
-                    var surprise = 0;
-                    for(i=0;i<vm.faceText.length;i++){
-                        confidence = vm.faceText[i].detectionConfidence;
-                        joy = joy + (generate_sentiment_score(vm.faceText[i].joyLikelihood) * confidence);
-                        anger = anger + (generate_sentiment_score(vm.faceText[i].angerLikelihood) * confidence);
-                        sorrow = sorrow + (generate_sentiment_score(vm.faceText[i].sorrowLikelihood) * confidence);
-                        surprise = surprise + (generate_sentiment_score(vm.faceText[i].surpriseLikelihood) * confidence);
-                    }
-                    vm.joy_score = joy/(5*vm.faceText.length);
-                    vm.anger_score = anger/(5*vm.faceText.length);
-                    vm.sorrow_score = sorrow/(5*vm.faceText.length);
-                    vm.surprise_score = surprise/(5*vm.faceText.length);
-                    vm.data = [vm.joy_score, vm.anger_score, vm.sorrow_score,vm.surprise_score];
-                    //vm.labels =['Red', 'Yellow','Blue','Green'];
-                    vm.labels =['Joy', 'Anger','sorrow','surprise'];
-                } else {
-                    vm.error = 'text not found';
-                }
-            });
+            return mainService.faceRecon();
         }
 
         function generate_sentiment_score(sentiment){
@@ -203,15 +224,16 @@
             return score;
         }
 
-// STARTS and Resets the loop if any
+        // STARTS and Resets the loop if any
         function startLoop() {
 
             myInterval = setInterval(Function("document.getElementById(\"snap\").click();"), 10000);
         }
 
-    function stopLoop() {
-        clearInterval(myInterval);
-    }
+        function stopLoop() {
+            clearInterval(myInterval);
+        }
+
         function dataUrlToImage(dataUrl,image_counter) {
             console.log("daturltoImage"+ image_counter);
             var binary = atob(dataUrl.split(',')[1]),
