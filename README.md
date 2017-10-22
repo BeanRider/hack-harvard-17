@@ -11,4 +11,9 @@ Next, we have implemented our own algorithm to aggregate and analyze these raw d
 All of these features are held together with a completely customized, clean, and modern UI that provides hierarchy to the report, using colors, bar graphs, and pie charts to visualize this valuable information. We also provide a live camera view for the user in-call, very similar to the profession-grade webinar systems, such as Skype and Cicso Webex.
 
 ## Screenshots
-![alt text](http://url/to/img.png)
+![alt text](https://raw.githubusercontent.com/BeanRider/hack-harvard-17/master/Screen%20Shot%202017-10-22%20at%205.11.11%20AM.png)
+
+![alt text](https://raw.githubusercontent.com/BeanRider/hack-harvard-17/master/Screen%20Shot%202017-10-22%20at%205.11.11%20AM.png)
+
+![alt text](https://raw.githubusercontent.com/BeanRider/hack-harvard-17/master/Screen%20Shot%202017-10-22%20at%205.05.12%20AM.png)
+
