@@ -1,8 +1,9 @@
-FROM gcr.io/google-appengine/nodejs
+FROM gcr.io/google-appengine/base
 
-RUN apt-get update && apt-get install -y libav-tools
+RUN apt-get update -y && apt-get install -y libav-tools
 RUN mkdir /nodejs && curl https://nodejs.org/dist/v0.12.7/node-v0.12.7-linux-x64.tar.gz | tar xvzf - -C /nodejs --strip-components=1
 
 ENV PATH $PATH:/nodejs/bin
 ENV NODE_ENV production
-CMD["npm","start"]
+WORKDIR /public
+CMD ["npm","start"]
