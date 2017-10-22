@@ -13,7 +13,7 @@ All of these features are held together with a completely customized, clean, and
 ## Screenshots
 ![alt text](https://raw.githubusercontent.com/BeanRider/hack-harvard-17/master/Screen%20Shot%202017-10-22%20at%205.11.11%20AM.png)
 
-![alt text](https://raw.githubusercontent.com/BeanRider/hack-harvard-17/master/Screen%20Shot%202017-10-22%20at%205.11.11%20AM.png)
+![alt text](https://raw.githubusercontent.com/BeanRider/hack-harvard-17/master/Screen%20Shot%202017-10-22%20at%205.06.50%20AM.png)
 
 ![alt text](https://raw.githubusercontent.com/BeanRider/hack-harvard-17/master/Screen%20Shot%202017-10-22%20at%205.05.12%20AM.png)
 
