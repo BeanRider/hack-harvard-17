@@ -259,7 +259,7 @@
             context.drawImage(video, 0, 0, 640, 480);
             vm.image_counter = vm.image_counter + 1;
 
-            if (vm.image_counter > 8) {
+            if (vm.image_counter > 5) {
                 vm.endMeeting();
             }
 
