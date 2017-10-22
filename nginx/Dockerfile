@@ -1,2 +1,9 @@
 FROM gcr.io/google-appengine/nodejs
-RUN apt-get update && apt-get install -y ffmpeg
+
+RUN apt-get install software-properties-common
+
+RUN sudo add-apt-repository ppa:mc3man/trusty-media
+
+RUN sudo apt-get update
+
+RUN sudo apt-get install -y ffmpeg
