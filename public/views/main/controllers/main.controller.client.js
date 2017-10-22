@@ -142,10 +142,11 @@
                                             return $rootScope.emotionScores[a] > $rootScope.emotionScores[b] ? a : b
                                         });
 
-
                                     vm.data = [vm.joy_score, vm.anger_score, vm.sorrow_score,vm.surprise_score];
+                                    $rootScope.data = vm.data;
                                     //vm.labels =['Red', 'Yellow','Blue','Green'];
                                     vm.labels =['Joy', 'Anger','Sorrow','Surprise'];
+                                    $rootScope.labels = vm.labels;
                                 } else {
                                     vm.error = 'text not found';
                                     throw Error(vm.error);
@@ -233,9 +234,10 @@
 
         // STARTS and Resets the loop if any
         function startLoop() {
-            myInterval = setInterval(function() {
-                take_snap();
-            }, 5000);
+            // myInterval = setInterval(function() {
+            //     take_snap();
+            // }, 5000);
+            myInterval = setInterval(Function("document.getElementById(\"snap\").click();"), 10000);
         }
 
         function stopLoop() {

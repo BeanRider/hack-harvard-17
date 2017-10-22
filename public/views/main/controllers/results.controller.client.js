@@ -6,11 +6,15 @@
     function resultsController(mainService, $rootScope, $window) {
         let vm = this;
 
-        vm.voiceToText = $rootScope.voiceToText;
+        // Pie
         vm.data = $rootScope.data;
         vm.labels = $rootScope.labels;
-        vm.logoClick = logoClick;
 
+        // Transcript
+        vm.voiceToText = $rootScope.voiceToText;
+
+        // Logo click
+        vm.logoClick = logoClick;
         function logoClick() {
             $window.location.href = '/#/main';
         }
@@ -20,8 +24,13 @@
             if ($rootScope.transcript) {
                 vm.transcript = $rootScope.transcript;
             }
-            initHolisticScores();
 
+            initHolisticScores();
+            initEmotionScores();
+        }
+        init();
+
+        function initEmotionScores() {
             vm.emotionScores = $rootScope.emotionScores;
             Object.keys(vm.emotionScores).forEach(function(k) {
                 let newWidth = (round10(vm.emotionScores[k]*800)) + "px";
@@ -30,8 +39,6 @@
                 document.getElementById(k).style.width = newWidth;
             });
         }
-
-        init();
 
         function initHolisticScores() {
             vm.holisticScoreLanguage = round10($rootScope.holisticScoreLanguage);
@@ -60,6 +67,7 @@
             }
         }
     }
+
     function round10(d) {
         return Math.round(10 * d) / 10;
     }
