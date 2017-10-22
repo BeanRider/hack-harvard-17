@@ -1,7 +1,5 @@
 FROM node:boron
 
-RUN apt-get update && apt-get install -y libav-tools
-
 # Install app dependencies
 COPY package.json .
 # For npm@5 or later, copy package-lock.json as well
@@ -12,5 +10,7 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 8080
+RUN apt-get update && apt-get install -y libav-tools
+
+EXPOSE 3000
 CMD [ "npm", "start" ]
